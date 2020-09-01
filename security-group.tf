@@ -45,3 +45,27 @@ resource "aws_security_group" "terraform-web-sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
+
+resource "aws_security_group" "terraform-db-sg" {
+  name = "terraform-db-sg"
+  description = "terraform-db-sg"
+  vpc_id = aws_vpc.terraform-vpc.id
+
+  tags = {
+    Name = "terraform-db-sg"
+  }
+
+  ingress {
+    from_port = 3306
+    to_port = 3306
+    protocol = "tcp"
+    cidr_blocks = [aws_vpc.terraform-vpc.cidr_block]
+  }
+
+  egress {
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}

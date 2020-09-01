@@ -40,3 +40,22 @@ resource "aws_subnet" "terraform-private-sub-2c" {
   }
 }
 
+resource "aws_subnet" "terraform-db-sub-2a" {
+  vpc_id = aws_vpc.terraform-vpc.id
+  cidr_block = "10.10.5.0/24"
+  availability_zone = "ap-northeast-2a"
+  map_public_ip_on_launch = false
+  tags = {
+    Name = "terraform-db-sub-2a"
+  }
+}
+
+resource "aws_subnet" "terraform-db-sub-2c" {
+  vpc_id = aws_vpc.terraform-vpc.id
+  cidr_block = "10.10.6.0/24"
+  availability_zone = "ap-northeast-2c"
+  map_public_ip_on_launch = false
+  tags = {
+    Name = "terraform-db-sub-2c"
+  }
+}
