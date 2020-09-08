@@ -46,6 +46,30 @@ resource "aws_security_group" "terraform-web-sg" {
   }
 }
 
+resource "aws_security_group" "terraform-alb-sg" {
+  vpc_id = aws_vpc.terraform-vpc.id
+  name = "terraform-alb-sg"
+  description = "alb-sg"
+
+  tags = {
+    Name = "terraform-alb-sg"
+  }
+
+  ingress {
+    from_port = 80
+    to_port = 80
+    protocol = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
 resource "aws_security_group" "terraform-db-sg" {
   name = "terraform-db-sg"
   description = "terraform-db-sg"
